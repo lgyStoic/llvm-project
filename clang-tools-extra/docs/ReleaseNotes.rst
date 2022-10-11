@@ -173,6 +173,11 @@ New checks
 
   Replaces groups of adjacent macros with an unscoped anonymous enum.
 
+- New :doc:`performance-eigenHasOperatorNew
+  <clang-tidy/checks/performance/eigenHasOperatorNew>` check.
+
+  FIXME: add release notes.
+
 - New :doc:`portability-std-allocator-const <clang-tidy/checks/portability/std-allocator-const>` check.
 
   Report use of ``std::vector<const T>`` (and similar containers of const
