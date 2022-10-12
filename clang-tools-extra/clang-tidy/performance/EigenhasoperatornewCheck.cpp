@@ -19,7 +19,7 @@ namespace performance {
 
 void EigenhasoperatornewCheck::registerMatchers(MatchFinder *Finder) {
   //operator new matcher
-  const auto opnewDecl = cxxMethodDecl(hasName("operator new")).bind("noopnew");
+  const auto opnewDecl = cxxMethodDecl(hasName("operator new")).bind("opnew");
   const auto eigenmxxfDecl = hasType(asString("Eigen::MatrixXf"));
   const auto eigenmx3fDecl = hasType(asString("Eigen::Matrix3f"));
   const auto eigenmx2fDecl = hasType(asString("Eigen::Matrix2f"));
@@ -41,7 +41,25 @@ void EigenhasoperatornewCheck::registerMatchers(MatchFinder *Finder) {
   const auto eigenvxdDecl = hasType(asString("Eigen::VectorXd"));
 
   // Finder->addMatcher(cxxRecordDecl(isExpansionInMainFile(), allOf(opnewDecl, anyOf(eigenmxxfDecl, eigenmx3fDecl)), this));
-  Finder->addMatcher(cxxRecordDecl(isExpansionInMainFile(), anyOf(hasDescendant(opnewDecl), hasDescendant(fieldDecl(anyOf(eigenmxxfDecl, eigenmx3fDecl)).bind("eigen")))).bind("cls"), this);
+  Finder->addMatcher(cxxRecordDecl(
+    isExpansionInMainFile(), 
+    anyOf(hasDescendant(opnewDecl), 
+      hasDescendant(fieldDecl(anyOf(eigenmxxfDecl, 
+                            eigenmx3fDecl, 
+                            eigenmx2fDecl, 
+                            eigenmx4fDecl, 
+                            eigenmx2dDecl, 
+                            eigenmx3dDecl, 
+                            eigenmx4dDecl, 
+                            eigenmxxdDecl,
+                            eigenv2fDecl,
+                            eigenv3fDecl,
+                            eigenv4fDecl,
+                            eigenvxfDecl,
+                            eigenv2dDecl,
+                            eigenv3dDecl,
+                            eigenv4dDecl,
+                            eigenvxdDecl)).bind("eigen")))).bind("cls"), this);
 
 }
 
@@ -52,7 +70,7 @@ void EigenhasoperatornewCheck::check(const MatchFinder::MatchResult &Result) {
   if(eigenDecl && !opnewDecl) {
 
     const auto *objDecl = Result.Nodes.getNodeAs<CXXRecordDecl>("cls");
-    diag(objDecl->getLocation(), "class test----fail")
+    diag(objDecl->getLocation(), "class don't contain Eigen operator new")
     << objDecl;
   }
 }
