@@ -304,6 +304,7 @@ Clang-Tidy Checks
    `objc-super-self <objc/super-self.html>`_, "Yes"
    `openmp-exception-escape <openmp/exception-escape.html>`_,
    `openmp-use-default-none <openmp/use-default-none.html>`_,
+   `performance-eigenHasOperatorNew <performance/eigenHasOperatorNew.html>`_, "Yes"
    `performance-faster-string-find <performance/faster-string-find.html>`_, "Yes"
    `performance-for-range-copy <performance/for-range-copy.html>`_, "Yes"
    `performance-implicit-conversion-in-loop <performance/implicit-conversion-in-loop.html>`_,

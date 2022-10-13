@@ -113,7 +113,35 @@ New checks
 - New :doc:`cppcoreguidelines-avoid-do-while
   <clang-tidy/checks/cppcoreguidelines/avoid-do-while>` check.
 
-  Warns when using ``do-while`` loops.
+  Detects confusable Unicode identifiers.
+
+- New :doc:`bugprone-assignment-in-if-condition
+  <clang-tidy/checks/bugprone/assignment-in-if-condition>` check.
+
+  Warns when there is an assignment within an if statement condition expression.
+
+- New :doc:`misc-const-correctness
+  <clang-tidy/checks/misc/const-correctness>` check.
+
+  Detects unmodified local variables and suggest adding ``const`` if the transformation is possible.
+
+- New :doc:`modernize-macro-to-enum
+  <clang-tidy/checks/modernize/macro-to-enum>` check.
+
+  Replaces groups of adjacent macros with an unscoped anonymous enum.
+
+- New :doc:`performance-eigenHasOperatorNew
+  <clang-tidy/checks/performance/eigenHasOperatorNew>` check.
+
+  FIXME: add release notes.
+
+- New :doc:`portability-std-allocator-const <clang-tidy/checks/portability/std-allocator-const>` check.
+
+  Report use of ``std::vector<const T>`` (and similar containers of const
+  elements). These are not allowed in standard C++ due to undefined
+  ``std::allocator<const T>``. They do not compile with libstdc++ or MSVC.
+  Future libc++ will remove the extension (`D120996
+  <https://reviews.llvm.org/D120996>`).
 
 New check aliases
 ^^^^^^^^^^^^^^^^^
